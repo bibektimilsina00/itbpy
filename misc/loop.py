@@ -20,11 +20,7 @@
 
 
 
-for i in range(10):
-    break
-    if i ==5:
-        print
-    print('')
+a,b,c=1,2,3
         
      
     

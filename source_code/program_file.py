@@ -4,12 +4,15 @@ import os
 
 
 
+
+
 # File to store data
 data_file = 'bank_data.json'
 
 def read_data():
     if not os.path.exists(data_file):
         return {}
+    
     with open(data_file, 'r') as file:
         return json.load(file)
 
@@ -17,22 +20,37 @@ def write_data(data):
     with open(data_file, 'w') as file:
         json.dump(data, file, indent=4)
 
+
+
+
+
 def create_account():
+
     users = read_data()
+    users={}
     username = input("Enter a new username: ")
 
     if username in users:
         print("Username already exists.")
         return
+    
     password = input("Enter a new password: ")
+
     users[username] = {'password': password, 'balance': 0}
+
+ 
+
+ 
     write_data(users)
     print("Account created successfully!")
 
 def login():
+
     users = read_data()
     username = input("Enter your username: ")
     password = input("Enter your password: ")
+
+
     
     if username in users and users[username]['password'] == password:
         return username
@@ -43,8 +61,8 @@ def login():
 def deposit(user):
     amount = float(input("Enter amount to deposit: "))
     users = read_data()
-  
     users[user]['balance'] += amount
+
 
 
  
@@ -58,7 +76,8 @@ def withdraw(user):
     
     amount = float(input("Enter amount to withdraw: "))
     users = read_data()
-    if users[user]['balance'] >= amount:
+    
+    if amount <= users[user]['balance']    :
         users[user]['balance'] -= amount
         write_data(users)
         print(f"Withdrew {amount}. New balance: {users[user]['balance']}")
@@ -80,7 +99,7 @@ def main():
 
 
     while True:
-        print("\n--- Simple Banking System ---")
+        print("\n--- ItBridge Banking System ---")
         print("1. Create a new account")
         print("2. Access existing account")
         print("3. Exit")
@@ -93,6 +112,8 @@ def main():
             create_account()
         elif choice == '2':
             user = login()
+
+            
             if user:
                 while True:
 
@@ -115,3 +136,5 @@ def main():
             break
 
 
+
+main()
