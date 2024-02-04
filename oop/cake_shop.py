@@ -11,7 +11,8 @@ class CakeManagementSystem:
     orders_file = 'orders.json'
     users:User
     orders:Order
-    def __init__(self):
+    def __init__(self,name):
+        self.name=name
         self.users = self.load_data(self.users_file)
         self.orders = self.load_data(self.orders_file)
 
@@ -30,6 +31,7 @@ class CakeManagementSystem:
             json.dump(data, file, indent=4)
 
     def create_user(self, username, password):
+        
         for user in self.users:
             if user['username'] == username:
                 print("User already exists.")
@@ -53,6 +55,9 @@ class CakeManagementSystem:
             print("No orders found for this user.")
 
 
-cms = CakeManagementSystem()
+cms1 = CakeManagementSystem(name='nishancms')
+cms2 = CakeManagementSystem(name="bibekcms")
+
+
 cms.create_user(username='ram',password='123')
 cms.place_order(username="ram",cake_type="Choclate",quantity=2)
